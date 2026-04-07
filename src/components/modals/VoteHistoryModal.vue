@@ -8,7 +8,7 @@
       @click="clearVoteHistory"
       icon="trash-alt"
       class="clear"
-      title="Clear vote history"
+      title="Limpar histórico de votação"
       v-if="session.isSpectator"
     />
 
