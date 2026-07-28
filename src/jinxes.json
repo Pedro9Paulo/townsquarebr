@@ -300,7 +300,7 @@
     "jinx": [
       {
         "id": "legion",
-        "reason": "O Mágico acorda junto com a Legião e pode registrar como do mau. A Legião sabe que há um Mágico em jogo, mas não sabe que jogador ele é."
+        "reason": "Se o Mágico está em jogo, a Legião acorda em grupos separados, cada grupo aprende que jogadores são do bem, com exceção do Mágico."
       },
       {
         "id": "marionette",
@@ -367,15 +367,15 @@
       },
       {
         "id": "drunk",
-        "reason": "O Matemático pode saber se a habilidade do Bêbado gerou informação falsa ou não funcionou corretamente."
+        "reason": "O Matemático sabe se a habilidade do Bêbado gerou informação falsa ou não funcionou corretamente."
       },
       {
         "id": "lunatic",
-        "reason": "O Matemático pode saber se o Lunático atacou jogador(es) diferente(s) do Demônio verdadeiro."
+        "reason": "O Matemático sabe se o Lunático atacou jogador(es) diferente(s) do Demônio verdadeiro."
       },
       {
         "id": "marionette",
-        "reason": "O Matemático pode saber se a habilidade da Marionete gerou informação falsa ou não funcionou corretamente."
+        "reason": "O Matemático sabe se a habilidade da Marionete gerou informação falsa ou não funcionou corretamente."
       }
     ]
   },

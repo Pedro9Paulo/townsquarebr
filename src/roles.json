@@ -2441,6 +2441,7 @@
     },
     {
         "id": "tor",
+        "firstNightReminder": "Pule a etapa de informação de Lacaios e Demônios.",
         "otherNightReminder": "",
         "reminders": [],
         "setup": true,

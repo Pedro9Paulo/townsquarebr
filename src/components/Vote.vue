@@ -10,12 +10,19 @@
       <em>{{ nominee.name }}</em
       >!
       <br />
-      <template v-if="!session.isSpectator || session.isVoteWatchingAllowed">
+      <template
+        v-if="
+          !session.isSpectator ||
+          session.isVoteWatchingAllowed ||
+          (!session.isVoteInProgress && session.lockedVote < 1)
+        "
+      >
         <em class="blue">
           {{ voteCount }} vote{{ voteCount !== 1 ? "s" : "" }}
         </em>
         in favor
       </template>
+      <template v-else> The vote is secret </template>
       <em v-if="nominee.role.team !== 'traveller'">
         (majority is {{ Math.ceil(alive / 2) }})
       </em>
@@ -23,11 +30,7 @@
 
       <template v-if="!session.isSpectator">
         <div
-          v-if="
-            session.isVoteWatchingAllowed &&
-            !session.isVoteInProgress &&
-            session.lockedVote < 1
-          "
+          v-if="!session.isVoteInProgress && session.lockedVote < 1"
           class="buttons"
         >
           Time per player:
@@ -91,7 +94,7 @@
         </div>
       </template>
       <template v-else-if="canVote">
-        <div v-if="session.isVoteWatchingAllowed && !session.isVoteInProgress">
+        <div v-if="!session.isVoteInProgress">
           {{ session.votingSpeed / 1000 }} seconds between votes
         </div>
         <div class="button-group">
@@ -234,17 +237,13 @@ export default {
       this.$store.commit("session/lockVote", 1);
       this.$store.commit("session/setVoteInProgress", true);
       clearInterval(this.voteTimer);
-      if (this.session.isVoteWatchingAllowed) {
-        this.voteTimer = setInterval(() => {
-          this.$store.commit("session/lockVote");
-          if (this.session.lockedVote > this.players.length) {
-            clearInterval(this.voteTimer);
-            this.$store.commit("session/setVoteInProgress", false);
-          }
-        }, this.session.votingSpeed);
-      } else {
-        this.$store.commit("session/lockVote", this.players.length + 1);
-      }
+      this.voteTimer = setInterval(() => {
+        this.$store.commit("session/lockVote");
+        if (this.session.lockedVote > this.players.length) {
+          clearInterval(this.voteTimer);
+          this.$store.commit("session/setVoteInProgress", false);
+        }
+      }, this.session.votingSpeed);
     },
     pause() {
       if (this.voteTimer) {

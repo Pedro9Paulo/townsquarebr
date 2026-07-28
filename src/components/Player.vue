@@ -20,13 +20,20 @@
           'vote-yes':
             (!session.isSpectator ||
               session.isVoteWatchingAllowed ||
+              (!session.isVoteInProgress && session.lockedVote < 1) ||
               player.id === session.playerId) &&
             session.votes[index],
           'vote-twice':
             (!session.isSpectator ||
               session.isVoteWatchingAllowed ||
+              (!session.isVoteInProgress && session.lockedVote < 1) ||
               player.id === session.playerId) &&
             session.votes[index] === 2,
+          'vote-hidden':
+            session.isSpectator &&
+            !session.isVoteWatchingAllowed &&
+            (session.isVoteInProgress || session.lockedVote >= 1) &&
+            player.id !== session.playerId,
           'vote-lock': voteLocked,
         },
         player.role.team,
@@ -109,20 +116,15 @@
         <font-awesome-icon
           icon="hand-paper"
           class="vote first-vote"
-          title="Hand UP"
           @click="vote(player)"
         />
         <font-awesome-icon
           icon="hand-paper"
           class="vote second-vote"
-          title="Second Hand UP"
-        />
-        <font-awesome-icon
-          icon="times"
-          class="vote"
-          title="Hand DOWN"
           @click="vote(player)"
         />
+        <font-awesome-icon icon="times" class="vote" @click="vote(player)" />
+        <font-awesome-icon icon="question" class="vote" @click="vote(player)" />
         <font-awesome-icon
           icon="times-circle"
           class="cancel"
@@ -171,7 +173,8 @@
             v-if="
               session.isSpectator &&
               player.connected &&
-              player.id === session.playerId
+              player.id === session.playerId &&
+              !session.nomination
             "
           >
             <font-awesome-icon icon="hand-paper" />
@@ -476,10 +479,10 @@ export default {
       var count = this.session.votes[this.index];
       if (player.hasTwoVotes && count === 1) {
         count = 2;
-      } else if (count === 1) {
-        count = 0;
-      } else {
+      } else if (count === 0) {
         count = 1;
+      } else {
+        count = 0;
       }
 
       this.$store.commit("session/voteSync", [
@@ -715,7 +718,8 @@ export default {
       }
     }
 
-    &.fa-times * {
+    &.fa-times *,
+    &.fa-question * {
       fill: url(#townsfolk);
     }
   }
@@ -754,7 +758,11 @@ export default {
 // you voted yes | a locked vote yes | a locked vote no
 #townsquare.vote .player.you.vote-yes .overlay svg.vote.fa-hand-paper,
 #townsquare.vote .player.vote-lock.vote-yes .overlay svg.vote.fa-hand-paper,
-#townsquare.vote .player.vote-lock:not(.vote-yes) .overlay svg.vote.fa-times {
+#townsquare.vote .player.vote-lock.vote-hidden .overlay svg.vote.fa-question,
+#townsquare.vote
+  .player.vote-lock:not(.vote-yes):not(.vote-hidden)
+  .overlay
+  svg.vote.fa-times {
   opacity: 1;
   transform: scale(1);
 }
