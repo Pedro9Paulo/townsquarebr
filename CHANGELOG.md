@@ -1,5 +1,9 @@
 # Release Notes
 
+### Version 2.22.8
+- Fixed errors when only the firstNight list is provided in the JSON
+- Improved consistency of night order overlay when only one of the firstNight and otherNight lists are provided in the JSON
+
 ### Version 2.22.7
 - Updated Magician/Legion and Mathematician jinxes
 

@@ -40,14 +40,22 @@ const getters = {
             ? edition.firstNight.indexOf("dusk") + 1.2
             : 0
           : edition.firstNight.indexOf(role.id) + 1
-        : role.firstNight;
+        : edition.otherNight &&
+            !rootState.roles.has(role.id) &&
+            !otherTravellers.has(role.id)
+          ? 0
+          : role.firstNight;
       role.otherNightInEdition = edition.otherNight
         ? otherTravellers.has(role.id)
           ? role.otherNight
             ? edition.otherNight.indexOf("dusk") + 1.2
             : 0
           : edition.otherNight.indexOf(role.id) + 1
-        : role.otherNight;
+        : edition.firstNight &&
+            !rootState.roles.has(role.id) &&
+            !otherTravellers.has(role.id)
+          ? 0
+          : role.otherNight;
       if (role.firstNightInEdition && !firstNight.includes(role)) {
         firstNight.push(role);
       }
@@ -57,7 +65,7 @@ const getters = {
     });
     rootState.npcs.forEach((npc) => {
       npc.firstNightInEdition =
-        edition.firstNight && edition.otherNight.includes(npc.id)
+        edition.firstNight && edition.firstNight.includes(npc.id)
           ? edition.firstNight.indexOf(npc.id) + 1
           : edition.firstNight && npc.firstNight
             ? edition.firstNight.indexOf("dusk") + 1.1
