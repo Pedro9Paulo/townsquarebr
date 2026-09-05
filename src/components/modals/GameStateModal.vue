@@ -4,7 +4,7 @@
     v-if="modals.gameState"
     @close="toggleModal('gameState')"
   >
-    <h3>Current Game State</h3>
+    <h3>Estado do jogo atual</h3>
     <textarea
       :value="gamestate"
       @input.stop="input = $event.target.value"

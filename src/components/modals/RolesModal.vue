@@ -4,7 +4,7 @@
     v-if="modals.roles && nonTravellers >= 5"
     @close="toggleModal('roles')"
   >
-    <h3>Select the characters for {{ nonTravellers }} players:</h3>
+    <h3>Selecione os personagens para {{ nonTravellers }} jogadore:</h3>
     <ul class="tokens" v-for="(teamRoles, team) in roleSelection" :key="team">
       <li class="count" :class="[team]">
         {{ teamRoles.reduce((a, { selected }) => a + selected, 0) }} /
@@ -76,26 +76,25 @@
           }"
         >
           <font-awesome-icon icon="people-arrows" />
-          Pass out {{ selectedRoles }} characters randomly
+          Enviar {{ selectedRoles }} personagens aleatoriamente
         </div>
         <div class="button" @click="selectRandomRoles">
           <font-awesome-icon icon="random" />
-          Shuffle characters
+          Embaralhar personagens
         </div>
       </div>
       <div class="illegal warning" v-if="isIllegalTokenSelected">
         <font-awesome-icon icon="exclamation-triangle" />
         <span>
-          Warning: there are characters selected cannot be sent to players! You
-          will not be able to distribute characters until these characters are
-          removed.
+          Aviso: há personagens selecionados que não podem ser enviados para jogadores!
+          Você não será capaz de distribui-los até esses personagens serem removidos
         </span>
       </div>
       <div class="setup warning" v-if="hasSelectedSetupRoles">
         <font-awesome-icon icon="exclamation-triangle" />
         <span>
-          Warning: there are characters selected that modify the game setup! The
-          randomizer does not account for these characters.
+          Aviso: Há personagens selecionados que modificão a preparação do jogo! 
+          O randomizador não sabe disso.
         </span>
       </div>
     </div>
@@ -212,8 +211,8 @@ export default {
         return;
       }
       const popup = this.players.some((player) => !player.connected)
-        ? "WARNING: Some players have not yet taken their seats. Are you sure you want to assign and distribute characters?"
-        : "Do you want to assign and distribute characters to all players?";
+        ? "AVISO: Alguns jogadores não sentaram. Você tem certeza que quer atribuir e distribuir personagens?"
+        : "Você quer atribuir e distribuir personagens para todos os jogadores?";
       if (!confirm(popup)) return;
       this.assignRoles();
       this.$store.commit("session/distributeRoles", true);

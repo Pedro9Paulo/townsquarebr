@@ -1,7 +1,7 @@
 <template>
   <Modal class="editions" v-if="modals.edition" @close="toggleModal('edition')">
     <div v-if="!isCustom">
-      <h3>Select an edition:</h3>
+      <h3>Selecione uma edição:</h3>
       <ul class="editions">
         <li
           v-for="edition in editions"
@@ -29,28 +29,28 @@
       </ul>
     </div>
     <div class="custom" v-else>
-      <h3>Load custom script / characters</h3>
-      To write your own custom script, you need to select the characters you
-      want to play with in the official
+      <h3>Carregue cenários customizados / personagens</h3>
+      Para escrever seus próprios cenários, você precisa selecionar os 
+      personagens você gostaria de jogar na ferramenta oficial
       <a href="https://script.bloodontheclocktower.com/" target="_blank"
         >Script Tool</a
       >
-      and then upload the generated JSON either directly here or provide a URL
-      to a hosted file. There are also a multitude of existing popular custom
-      scripts, many of which can be found at
+      e então carregar o JSON gerado diretamente ou com inserindo o URL onde o
+      arquivo está hospedado. Há também uma variedade de cenários customizados
+      populares já existentes, muitos dos quais podem ser encontrados em
       <a href="https://botcscripts.com/?sort=num_favs" target="_blank"
         >botcscripts.com</a
       >.<br />
       <br />
-      To play with your own homebrew characters, please read
+      Para jogar com seus próprios personagens caseiros, por favor leia
       <a
         href="https://github.com/nicholas-eden/townsquare#custom-character-support"
         target="_blank"
-        >the documentation</a
+        >a documentação</a
       >
-      on how to write a custom character JSON object.
-      <b>Only load JSON files from sources that you trust!</b>
-      <h3>Some popular custom scripts:</h3>
+      em como escrever um JSON de personagem customizado.
+      <b>Só carregue arquivos JSON de fontes que você confia!</b>
+      <h3>Alguns cenários populares:</h3>
       <ul class="scripts">
         <li
           v-for="(script, index) in customs.teensyville"
@@ -75,16 +75,16 @@
       />
       <div class="button-group">
         <div class="button" @click="openUpload">
-          <font-awesome-icon icon="file-upload" /> Upload JSON
+          <font-awesome-icon icon="file-upload" /> Carregue JSON
         </div>
         <div class="button" @click="promptURL">
-          <font-awesome-icon icon="link" /> Enter URL
+          <font-awesome-icon icon="link" /> Entre URL
         </div>
         <div class="button" @click="readFromClipboard">
-          <font-awesome-icon icon="clipboard" /> Use JSON from Clipboard
+          <font-awesome-icon icon="clipboard" /> Use JSON da área de tranferência
         </div>
         <div class="button" @click="isCustom = false">
-          <font-awesome-icon icon="undo" /> Back
+          <font-awesome-icon icon="undo" /> Voltar
         </div>
       </div>
     </div>
@@ -123,7 +123,7 @@ export default {
             this.parseRoles(roles);
           } catch (e) {
             console.log(e);
-            alert("Error reading custom script: " + e.message);
+            alert("Erro lendo cenário customizado " + e.message);
           }
           this.$refs.upload.value = "";
         });
@@ -131,7 +131,7 @@ export default {
       }
     },
     promptURL() {
-      const url = prompt("Enter URL to a custom-script.json file");
+      const url = prompt("Entre URL de um arquivo cenario-customizado.json");
       if (url) {
         this.handleURL(url);
       }
@@ -144,7 +144,7 @@ export default {
           this.parseRoles(script);
         } catch (e) {
           console.log(e);
-          alert("Error loading custom script: " + e.message);
+          alert("Erro carregando cenário customizado: " + e.message);
         }
       }
     },
@@ -155,7 +155,7 @@ export default {
         this.parseRoles(roles);
       } catch (e) {
         console.log(e);
-        alert("Error reading custom script: " + e.message);
+        alert("Erro lendo cenário customizado: " + e.message);
       }
     },
     loadOfficial(edition) {

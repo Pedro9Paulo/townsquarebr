@@ -1,6 +1,6 @@
 <template>
   <Modal v-if="isDisplayed" @close="toggleModal('reminder')">
-    <h3>Choose a reminder token:</h3>
+    <h3>Escolha um marcador:</h3>
     <ul class="reminders">
       <li
         v-for="reminder in availableReminders"
@@ -130,9 +130,9 @@ export default {
         }
       });
 
-      reminders.push({ imageAlt: "good", name: "Good" });
-      reminders.push({ imageAlt: "evil", name: "Evil" });
-      reminders.push({ imageAlt: "custom", name: "Custom Note" });
+      reminders.push({ imageAlt: "good", name: "Bom" });
+      reminders.push({ imageAlt: "evil", name: "Mau" });
+      reminders.push({ imageAlt: "custom", name: "Nota personalizada" });
       return reminders;
     },
     isDisplayed() {

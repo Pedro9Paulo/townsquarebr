@@ -34,15 +34,15 @@
     <table>
       <thead>
         <tr>
-          <td>Time</td>
-          <td>Nominator</td>
-          <td>Nominee</td>
-          <td>Type</td>
-          <td>Votes</td>
-          <td>Majority</td>
+          <td>Hora</td>
+          <td>Nomeador</td>
+          <td>Nomeado</td>
+          <td>Tipo</td>
+          <td>Votos</td>
+          <td>Maioria</td>
           <td>
             <font-awesome-icon icon="user-friends" />
-            Voters
+            Votantes
           </td>
         </tr>
       </thead>

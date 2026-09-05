@@ -17,7 +17,7 @@
       </li>
       <li>
         <h3>
-          Choose a new character for
+          Escolha um novo personagem para
           {{
             playerIndex >= 0 && players.length
               ? players[playerIndex].name

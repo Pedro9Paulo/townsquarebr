@@ -14,7 +14,7 @@
       title="Show Character Reference"
     />
     <h3>
-      Night Order
+      Ordem da noite
       <br />
       <font-awesome-icon icon="cloud-moon" />
       {{ edition.name || "Custom Script" }}
@@ -143,18 +143,18 @@ export default {
       if (duskIndex > 0) {
         rolesFirstNight.push({
           id: "dusk",
-          name: "Dusk",
+          name: "Anoitecer",
           firstNight: duskIndex,
-          firstNightReminder: "Start the Night Phase.",
+          firstNightReminder: "Comece a fase da noite.",
           players: [],
         });
       }
       if (dawnIndex > 0) {
         rolesFirstNight.push({
           id: "dawn",
-          name: "Dawn",
+          name: "Amanhacer",
           firstNight: dawnIndex,
-          firstNightReminder: "Wait a few seconds. End the Night Phase.",
+          firstNightReminder: "Aguarde alguns segundos. Encerre a fase da noite.",
           players: [],
         });
       }
@@ -169,23 +169,23 @@ export default {
         if (minionIndex > 0) {
           rolesFirstNight.push({
             id: "minioninfo",
-            name: "Minion info",
+            name: "Info de Lacaio",
             firstNight: minionIndex,
             team: "minion",
             players: this.players.filter((p) => p.role.team === "minion"),
             firstNightReminder:
-              "If there are 7 or more players, wake all Minions: Show the *THIS IS THE DEMON* token. Point to the Demon. Show the *THESE ARE YOUR MINIONS* token. Point to the other Minions.",
+              "Se há 7 ou mais jogadores, acorde todos os Lacaios: Mostre *ESSE É O DEMÔNIO*. Aponte para o Demônio. Mostre *ESSES SÃO SEUS LACAIOS*. Aponte para os outros Lacaios.",
           });
         }
         if (demonIndex > 0) {
           rolesFirstNight.push({
             id: "demoninfo",
-            name: "Demon info & bluffs",
+            name: "Info de Demônio & Blefes",
             firstNight: demonIndex,
             team: "demon",
             players: this.players.filter((p) => p.role.team === "demon"),
             firstNightReminder:
-              "If there are 7 or more players, wake the Demon: Show the *THESE ARE YOUR MINIONS* token. Point to all Minions. Show the *THESE CHARACTERS ARE NOT IN PLAY* token. Show 3 not-in-play good character tokens.",
+              "Se há 7 ou mais jogadores, acorde o Demônio: Mostre *ESSES SÃO SEUS LACAIOS*. Aponte para todos os Lacaios. Mostre *ESSES PERSONAGENS NÃO ESTÃO EM JOGO*. Mostre a ficha de 3 personagens do bem fora do jogo",
           });
         }
       }
@@ -243,18 +243,18 @@ export default {
       if (duskIndex > 0) {
         rolesOtherNight.push({
           id: "dusk",
-          name: "Dusk",
+          name: "Anoitecer",
           otherNight: duskIndex,
-          otherNightReminder: "Start the Night Phase.",
+          otherNightReminder: "Comece a fase da noite.",
           players: [],
         });
       }
       if (dawnIndex > 0) {
         rolesOtherNight.push({
           id: "dawn",
-          name: "Dawn",
+          name: "Amanhacer",
           otherNight: dawnIndex,
-          otherNightReminder: "Wait for a few seconds. End the Night Phase.",
+          otherNightReminder: "Aguarde alguns segundos. Encerre a fase da noite.",
           players: [],
         });
       }
