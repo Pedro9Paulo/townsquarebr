@@ -4,8 +4,8 @@
       class="nomlog-summary"
       v-show="session.voteHistory.length && session.sessionId"
       @click="toggleModal('voteHistory')"
-      :title="`${session.voteHistory.length} recent ${
-        session.voteHistory.length == 1 ? 'nomination' : 'nominations'
+      :title="`${session.voteHistory.length} recente ${
+        session.voteHistory.length == 1 ? 'nomeação' : 'nomeações'
       }`"
     >
       <font-awesome-icon icon="book-dead" />
@@ -19,7 +19,7 @@
       }"
       v-if="session.sessionId"
       @click="leaveSession"
-      :title="`${session.playerCount} other players in this session${
+      :title="`${session.playerCount} outros jogadores nessa partida${
         session.ping ? ' (' + session.ping + 'ms latency)' : ''
       }`"
     >
@@ -43,22 +43,22 @@
 
         <template v-if="tab === 'grimoire'">
           <!-- Grimoire -->
-          <li class="headline">Grimoire</li>
+          <li class="headline">Grimório</li>
           <li @click="toggleGrimoire" v-if="players.length">
-            <template v-if="!grimoire.isPublic">Hide</template>
-            <template v-if="grimoire.isPublic">Show</template>
+            <template v-if="!grimoire.isPublic">Esconder</template>
+            <template v-if="grimoire.isPublic">Mostrar</template>
             <em>[G]</em>
           </li>
           <li @click="toggleNight" v-if="!session.isSpectator">
-            <template v-if="!grimoire.isNight">Switch to Night</template>
-            <template v-if="grimoire.isNight">Switch to Day</template>
+            <template v-if="!grimoire.isNight">Trocar para a noite</template>
+            <template v-if="grimoire.isNight">Trocar para o dia</template>
             <em>[S]</em>
           </li>
           <li
             @click="toggleNightOrder"
             v-if="players.length && !session.isSpectator"
           >
-            Night Order
+            Ordem da noite
             <em>
               <font-awesome-icon
                 :icon="[
@@ -83,11 +83,11 @@
             </em>
           </li>
           <li @click="setBackground">
-            Background Image
+            Imagem de fundo
             <em><font-awesome-icon icon="image" /></em>
           </li>
           <li @click="toggleUnofficial">
-            <small>Use Unofficial Art</small>
+            <small>Usar arte não oficial</small>
             <em
               ><font-awesome-icon
                 :icon="[
@@ -97,7 +97,7 @@
             /></em>
           </li>
           <li v-if="!edition.isOfficial" @click="imageOptIn">
-            <small>Show Custom Images</small>
+            <small>Mostrar imagens customizadas</small>
             <em
               ><font-awesome-icon
                 :icon="[
@@ -107,14 +107,14 @@
             /></em>
           </li>
           <li @click="toggleStatic">
-            Disable Animations
+            Disabilitar animações
             <em
               ><font-awesome-icon
                 :icon="['fas', grimoire.isStatic ? 'check-square' : 'square']"
             /></em>
           </li>
           <li @click="toggleMuted">
-            Mute Sounds
+            Mutar Sons
             <em
               ><font-awesome-icon
                 :icon="['fas', grimoire.isMuted ? 'volume-mute' : 'volume-up']"
@@ -125,22 +125,22 @@
         <template v-if="tab === 'session'">
           <!-- Session -->
           <li class="headline" v-if="session.sessionId">
-            {{ session.isSpectator ? "Playing" : "Hosting" }}
+            {{ session.isSpectator ? "Jogando" : "Hospedando" }}
           </li>
-          <li class="headline" v-else>Live Session</li>
+          <li class="headline" v-else>Partida</li>
           <template v-if="!session.sessionId">
-            <li @click="hostSession">Host (Storyteller)<em>[H]</em></li>
-            <li @click="joinSession">Join (Player)<em>[J]</em></li>
+            <li @click="hostSession">Hospedar (Narrador)<em>[H]</em></li>
+            <li @click="joinSession">Entrar (Jogador)<em>[J]</em></li>
           </template>
           <template v-else>
             <li v-if="session.ping">
               <small>
-                Delay to {{ session.isSpectator ? "Host" : "Players" }}
+                Delay to {{ session.isSpectator ? "Host" : "Jogadores" }}
               </small>
               <em>{{ session.ping }}ms</em>
             </li>
             <li @click="copySessionUrl">
-              Copy Player Link
+              Copiar link de jogador
               <em><font-awesome-icon icon="copy" /></em>
             </li>
             <li
