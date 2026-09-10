@@ -12,7 +12,7 @@
       }"
     ></li>
     <li v-if="players.length - teams.traveller < 5">
-      Please add more players!
+      Por favor adicione mais jogadoes!
     </li>
     <li>
       <span class="meta" v-if="!(edition.isOfficial || edition.hideTitle)">
@@ -64,7 +64,7 @@
         />
       </span>
       <span v-if="grimoire.isNight">
-        Night phase
+        Fase da noite
         <font-awesome-icon :icon="['fas', 'cloud-moon']" />
       </span>
     </li>

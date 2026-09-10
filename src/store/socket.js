@@ -502,9 +502,9 @@ class LiveSession {
       });
       if (missing.length) {
         alert(
-          `This session contains custom characters that can't be found. ` +
-            `Please load them before joining! ` +
-            `Missing roles: ${missing.join(", ")}`,
+          `Não foi possível encontrar certos personagens customizados nessa partida. ` +
+            `Por favore carregue-os antes de entar! ` +
+            `Papéis faltando: ${missing.join(", ")}`,
         );
         this.disconnect();
         this._store.commit("toggleModal", "edition");

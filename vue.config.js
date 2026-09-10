@@ -1,5 +1,7 @@
-module.exports = {
-  // if the app is supposed to run on Github Pages in a subfolder, use the following config:
-  // publicPath: process.env.NODE_ENV === "production" ? "/townsquare/" : "/"
-  publicPath: process.env.NODE_ENV === "production" ? "/townsquarebr/" : "/",
-};
+const { defineConfig } = require('@vue/cli-service')
+module.exports = defineConfig({
+  transpileDependencies: true,
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/townsquarebr/' // Change this to your exact GitHub repo name
+    : '/'
+})

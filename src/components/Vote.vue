@@ -18,22 +18,22 @@
         "
       >
         <em class="blue">
-          {{ voteCount }} vote{{ voteCount !== 1 ? "s" : "" }}
+          {{ voteCount }} voto{{ voteCount !== 1 ? "s" : "" }}
         </em>
-        in favor
+        a favor
       </template>
-      <template v-else> The vote is secret </template>
+      <template v-else> O voto é secreto </template>
       <em v-if="nominee.role.team !== 'traveller'">
-        (majority is {{ Math.ceil(alive / 2) }})
+        (a maioria é {{ Math.ceil(alive / 2) }})
       </em>
-      <em v-else>(majority is {{ Math.ceil(players.length / 2) }})</em>
+      <em v-else>(a maioria é {{ Math.ceil(players.length / 2) }})</em>
 
       <template v-if="!session.isSpectator">
         <div
           v-if="!session.isVoteInProgress && session.lockedVote < 1"
           class="buttons"
         >
-          Time per player:
+          Tempo por jogador:
           <font-awesome-icon
             @mousedown.prevent="setVotingSpeed(-100)"
             icon="minus-circle"
@@ -53,7 +53,7 @@
         >
           <em>
             <font-awesome-icon icon="exclamation-triangle" />
-            Some seats are unoccupied
+            Alguns assentos estão vazios
             <font-awesome-icon icon="exclamation-triangle" />
           </em>
         </div>
@@ -63,10 +63,10 @@
             v-if="!session.isVoteInProgress"
             @click="countdown"
           >
-            Countdown
+            Contagem Regressiva
           </div>
           <div class="button" v-if="!session.isVoteInProgress" @click="start">
-            {{ session.lockedVote ? "Restart" : "Start" }}
+            {{ session.lockedVote ? "Reiniciar" : "Iniciar" }}
           </div>
           <template v-else>
             <div
@@ -74,11 +74,11 @@
               :class="{ disabled: !session.lockedVote }"
               @click="pause"
             >
-              {{ voteTimer ? "Pause" : "Resume" }}
+              {{ voteTimer ? "Pause" : "Despause" }}
             </div>
-            <div class="button" @click="stop">Reset</div>
+            <div class="button" @click="stop">Resetar</div>
           </template>
-          <div class="button demon" @click="finish">Close</div>
+          <div class="button demon" @click="finish">Fechar</div>
         </div>
         <div class="button-group mark" v-if="nominee.role.team !== 'traveller'">
           <div
@@ -88,14 +88,14 @@
             }"
             @click="setMarked"
           >
-            Mark for execution
+            Marcado para execução
           </div>
           <div class="button" @click="removeMarked">Clear mark</div>
         </div>
       </template>
       <template v-else-if="canVote">
         <div v-if="!session.isVoteInProgress">
-          {{ session.votingSpeed / 1000 }} seconds between votes
+          {{ session.votingSpeed / 1000 }} segundos entre votos
         </div>
         <div class="button-group">
           <div
@@ -103,14 +103,14 @@
             @click="vote(0)"
             :class="{ disabled: !currentVote }"
           >
-            Hand DOWN
+            ABAIXAR mão
           </div>
           <div
             class="button demon"
             @click="vote(1)"
             :class="{ disabled: currentVote === 1 }"
           >
-            Hand UP
+            LEVANTAR mão
           </div>
           <div
             class="button demon"
@@ -122,8 +122,8 @@
           </div>
         </div>
       </template>
-      <div v-else-if="!player">Please claim a seat to vote.</div>
-      <div v-else-if="!player.connected">Please reclaim your seat to vote.</div>
+      <div v-else-if="!player">É necessário sentar para votar.</div>
+      <div v-else-if="!player.connected">É necessário estar sentado para votar.</div>
     </div>
     <transition name="blur">
       <div
@@ -133,7 +133,7 @@
         <span>3</span>
         <span>2</span>
         <span>1</span>
-        <span>GO</span>
+        <span>JÁ</span>
         <audio
           :autoplay="!grimoire.isMuted"
           src="../assets/sounds/countdown.mp3"
@@ -159,7 +159,7 @@ export default {
       const players = this.players.length;
       const nomination = this.session.nomination[0];
       return {
-        transform: `rotate(${Math.round((nomination / players) * 360)}deg)`,
+        transform: `girar(${Math.round((nomination / players) * 360)}° graus)`,
         transitionDuration: this.session.votingSpeed - 100 + "ms",
       };
     },
@@ -172,7 +172,7 @@ export default {
       const lock = this.session.lockedVote;
       const rotation = (360 * (nomination + Math.min(lock, players))) / players;
       return {
-        transform: `rotate(${Math.round(rotation)}deg)`,
+        transform: `girar(${Math.round(rotation)}° graus)`,
         transitionDuration: this.session.votingSpeed - 100 + "ms",
       };
     },

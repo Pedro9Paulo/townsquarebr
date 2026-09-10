@@ -98,7 +98,7 @@
         class="has-vote"
         v-if="player.isDead && !player.isVoteless"
         @click="updatePlayer('isVoteless', true)"
-        title="Ghost vote"
+        title="Voto de Morto"
       />
 
       <!-- Two votes icon -->
@@ -107,7 +107,7 @@
         class="two-votes"
         v-if="player.hasTwoVotes"
         @click="updatePlayer('hasTwoVotes', false)"
-        title="Has two votes"
+        title="Tem 2 votos"
       />
 
       <!-- Overlay icons -->
@@ -128,26 +128,26 @@
         <font-awesome-icon
           icon="times-circle"
           class="cancel"
-          title="Cancel"
+          title="Cancelar"
           @click="cancel()"
         />
         <font-awesome-icon
           icon="exchange-alt"
           class="swap"
           @click="swapPlayer(player)"
-          title="Swap seats with this player"
+          title="Trocar assentos com esse jogador"
         />
         <font-awesome-icon
           icon="redo-alt"
           class="move"
           @click="movePlayer(player)"
-          title="Move player to this seat"
+          title="Mover jogador para esse assento"
         />
         <font-awesome-icon
           icon="hand-point-right"
           class="nominate"
           @click="nominatePlayer(player)"
-          title="Nominate this player"
+          title="Nomear esse jogador"
         />
       </div>
 
@@ -178,11 +178,11 @@
             "
           >
             <font-awesome-icon icon="hand-paper" />
-            Raise Hand
+            Levantar mão
           </li>
           <li @click="changeAlignment" v-if="player.role.id">
             <font-awesome-icon icon="yin-yang" />
-            Change Alignment
+            Trocar alinhamento
           </li>
           <li
             @click="changePronouns"
@@ -194,7 +194,7 @@
             "
           >
             <font-awesome-icon icon="venus-mars" />
-            Change Pronouns
+            Trocar pronomes
           </li>
           <li
             @click="changeName"
@@ -207,7 +207,7 @@
             "
           >
             <font-awesome-icon icon="user-edit" />
-            Rename
+            Trocar nome
           </li>
           <template v-if="!session.isSpectator">
             <li
@@ -215,26 +215,26 @@
               v-if="session.isTwoVotesEnabled"
             >
               <font-awesome-icon icon="sign-language" class="two-votes-icon" />
-              Has Two Votes
+              Tem 2 votos
             </li>
             <li @click="movePlayer()" :class="{ disabled: session.lockedVote }">
               <font-awesome-icon icon="redo-alt" />
-              Move Player
+              Mover Jogador
             </li>
             <li @click="swapPlayer()" :class="{ disabled: session.lockedVote }">
               <font-awesome-icon icon="exchange-alt" />
-              Swap Seats
+              Trocar assentos
             </li>
             <li @click="removePlayer" :class="{ disabled: session.lockedVote }">
               <font-awesome-icon icon="times-circle" />
-              Remove
+              Remover
             </li>
             <li
               @click="updatePlayer('id', '', true)"
               v-if="player.id && session.sessionId"
             >
               <font-awesome-icon icon="chair" />
-              Empty Seat
+              Esvaziar assento
             </li>
             <template v-if="!session.nomination">
               <li @click="nominatePlayer()">
@@ -255,12 +255,12 @@
                 (player.id === session.playerId && !player.connected)
               "
             >
-              Claim seat</template
+              Clamar assento</template
             >
             <template v-else-if="player.id === session.playerId">
-              Vacate Seat
+              Abandonar assento
             </template>
-            <template v-else> Seat Occupied</template>
+            <template v-else> Assento ocupado</template>
           </li>
         </ul>
       </transition>
@@ -374,7 +374,7 @@ export default {
     changePronouns() {
       if (this.session.isSpectator && this.player.id !== this.session.playerId)
         return;
-      const pronouns = prompt("Player pronouns", this.player.pronouns);
+      const pronouns = prompt("Pronomes do jogador", this.player.pronouns);
       //Only update pronouns if not null (prompt was not cancelled)
       if (pronouns !== null) {
         this.updatePlayer("pronouns", pronouns, true);
@@ -404,7 +404,7 @@ export default {
       }
     },
     changeName() {
-      const name = prompt("Player name", this.player.name) || this.player.name;
+      const name = prompt("Nome do jogador", this.player.name) || this.player.name;
       if (name !== null && name !== "") {
         this.updatePlayer("name", name, true);
       }
@@ -459,14 +459,14 @@ export default {
     setSeatTitle() {
       if (this.player.connected) {
         if (this.player.id === this.session.playerId) {
-          return "Your claimed seat";
+          return "Seu assento";
         }
-        return "Seat claimed by " + this.player.name;
+        return "Assento de " + this.player.name;
       } else {
         if (this.player.id === this.session.playerId) {
-          return "Your reserved seat. Click 'Claim seat' to reconnect";
+          return "Seu assento reservado. Clique 'Clamar assento' para reconectar";
         }
-        return "Seat reserved for " + this.player.name;
+        return "Assento reservado para " + this.player.name;
       }
     },
     /**

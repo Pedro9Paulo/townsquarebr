@@ -91,7 +91,7 @@ try {
   );
   // });
 } catch (e) {
-  console.error("couldn't load jinxes", e);
+  console.error("Não foi possível carregar as zicas", e);
 }
 
 // base definition for custom roles
