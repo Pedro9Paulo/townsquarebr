@@ -198,7 +198,7 @@
             /></em>
           </li>
           <li @click="lowerHands" v-if="players.length">
-            Abixar todas as mãos
+            Abaixar todas as mãos
             <em><font-awesome-icon icon="sign-language" /></em>
           </li>
           <li @click="randomizeSeatings" v-if="players.length > 2">
