@@ -4,7 +4,7 @@
     <div>
       Bem-vinde ao
       <b>Grimório e Praça virtual</b> não-oficial de Blood on the Clocktower!
-      Por favor adiciona mais jogadores pelo
+      Por favor adicionar mais jogadores pelo
       <span class="button" @click="toggleMenu">
         <font-awesome-icon icon="cog" /> Menu
       </span>
@@ -16,7 +16,7 @@
           >GitHub</a
         >. Isso não é afiliado ao The Pandemonium Institute ou Across the Board. "Blood on the
         Clocktower" é uma marca registrada de Steven Medway and The Pandemonium Institute.
-        oficialmente localizada para o Brasil pela Across the Board        
+        Oficialmente localizada para o Brasil pela Across the Board        
       </div>
     </div>
     <img src="../assets/community-created-content.webp" alt="" class="ccc" />
